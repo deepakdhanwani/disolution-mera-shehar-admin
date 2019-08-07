@@ -1,3 +1,100 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-header class="bar bar-header bar-dark">
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Mera Shehar Admin
+      </ion-title>
+      <ion-buttons slot="secondary" *ngIf="isAuthenticated | async">
+        <ion-button>
+          <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="onSettingButton($event)">
+          <ion-icon slot="icon-only" name="settings"> </ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-menu side="start" menuId="first">
+    <ion-header>
+      <ion-toolbar color="dark">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content color="light">
+      <ion-list lines="none">
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/home/users']">
+            <ion-icon name="contacts" slot="start"></ion-icon>
+            <ion-label>Users</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="paper" slot="start"></ion-icon>
+            <ion-label>News</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="mail-unread" slot="start"></ion-icon>
+            <ion-label>Complaints</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="help" slot="start"></ion-icon>
+            <ion-label>Questions</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="bulb" slot="start"></ion-icon>
+            <ion-label>Suggestions</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="microphone" slot="start"></ion-icon>
+            <ion-label>Annoucements</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="paper-plane" slot="start"></ion-icon>
+            <ion-label>Classified</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="calendar" slot="start"></ion-icon>
+            <ion-label>Events</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="notifications-outline" slot="start"></ion-icon>
+            <ion-label>Notificaions</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="people" slot="start"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item (click)="onLogout()">
+            <ion-icon name="log-out" slot="start"></ion-icon>
+            <ion-label>Signout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-content>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-content>
 </ion-app>

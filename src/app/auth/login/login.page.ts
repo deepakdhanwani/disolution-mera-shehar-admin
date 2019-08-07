@@ -7,6 +7,7 @@ import { Observable } from "rxjs";
 import * as fromRoot from "../../reducers";
 import * as UIActions from "../../shared/ui.actions";
 import { Store } from "@ngrx/store";
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: "app-login",
@@ -20,11 +21,20 @@ export class LoginPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private menuController: MenuController
   ) {}
 
   ngOnInit() {
     this.isLoading = this.store.select(fromRoot.getLoadingStatus);
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false);
+  }
+
+  ionViewDidLeave() {
+    this.menuController.enable(true);
   }
 
   onRegister() {

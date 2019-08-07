@@ -52,7 +52,7 @@ export class AuthService {
           result.user.uid,
           result.user.email,
           fullName,
-          "guest",
+          "reporter",
           null,
           state,
           city

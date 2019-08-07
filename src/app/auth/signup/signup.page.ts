@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import * as fromRoot from '../../reducers';
 import { Store } from '@ngrx/store';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: "app-signup",
@@ -32,7 +33,8 @@ export class SignupPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private http: HttpClient,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private menuController: MenuController
   ) {}
 
   ngOnInit() {
@@ -44,6 +46,14 @@ export class SignupPage implements OnInit {
           this.stateList.push(state.state);
         }
       });
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false);
+  }
+
+  ionViewDidLeave() {
+    this.menuController.enable(true);
   }
 
   onLogin() {
