@@ -5,19 +5,23 @@ import { RouteReuseStrategy } from "@angular/router";
 import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
-import { environment } from "../environments/environment";
 import { StoreModule } from "@ngrx/store";
+import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
+import { environment } from "../environments/environment";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
-import { SharedModule } from './shared/shared.module';
-import { reducers } from './reducers';
-import { SettingsPopoverComponent } from './home/settings-popover/settings-popover.component';
+import { SharedModule } from "./shared/shared.module";
+import { reducers } from "./reducers";
+import { SettingsPopoverComponent } from "./home/settings-popover/settings-popover.component";
 
 @NgModule({
   declarations: [AppComponent, SettingsPopoverComponent],
@@ -31,7 +35,11 @@ import { SettingsPopoverComponent } from './home/settings-popover/settings-popov
     AngularFireAuthModule,
     AngularFireStorageModule,
     SharedModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [
     StatusBar,
@@ -39,6 +47,6 @@ import { SettingsPopoverComponent } from './home/settings-popover/settings-popov
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
 
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
