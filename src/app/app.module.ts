@@ -11,6 +11,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireFunctionsModule } from "@angular/fire/functions";
 import { StoreModule } from "@ngrx/store";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
@@ -34,6 +35,7 @@ import { SettingsPopoverComponent } from "./home/settings-popover/settings-popov
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    AngularFireFunctionsModule,
     SharedModule,
     StoreModule.forRoot(reducers),
     BrowserAnimationsModule,

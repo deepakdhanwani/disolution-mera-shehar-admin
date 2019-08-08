@@ -44,11 +44,17 @@ export class UsersPage implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((users: User[]) => {
         this.dataSource.data =  users;
       });
+
+      //this.paginator.
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  onPageChange(event: any) {
+    console.log(event);
   }
 
   ngOnDestroy() {

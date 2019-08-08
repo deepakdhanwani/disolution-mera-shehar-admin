@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFireFunctions } from "@angular/fire/functions";
 import { tap } from "rxjs/operators";
 import { Store } from "@ngrx/store";
 
@@ -13,6 +14,7 @@ import * as UsersActions from "./reducer/users.action";
 export class UserService {
   constructor(
     private fireStore: AngularFirestore,
+    private fireFunctions: AngularFireFunctions,
     private store: Store<fromUsers.State>
   ) {}
 
@@ -28,5 +30,25 @@ export class UserService {
         })
       )
       .subscribe();
+
+    //this.fireFunctions.functions.httpsCallable.call();
+    // console.log(
+    //   this.fireFunctions
+    //     .httpsCallable("addMessage")
+    //     .call({ name: "Deepak Dhanwani" })
+    // );
+    const callable = this.fireFunctions.httpsCallable("addMessage");
+    callable({name: "test_fun" }).subscribe(
+      value => {
+        console.log(value);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  resultOfRequest(data) {
+    console.log(data);
   }
 }
