@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
     this.menuController.enable(false);
   }
 
-  ionViewDidLeave() {
+  ionViewWillLeave() {
     this.menuController.enable(true);
   }
 

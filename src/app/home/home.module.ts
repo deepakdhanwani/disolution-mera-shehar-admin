@@ -25,7 +25,6 @@ import { SettingsPopoverComponent } from "./settings-popover/settings-popover.co
       }
     ])
   ],
-  declarations: [HomePage, SettingsPopoverComponent],
-  entryComponents: [SettingsPopoverComponent]
+  declarations: [HomePage]
 })
 export class HomePageModule {}

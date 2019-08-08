@@ -52,7 +52,7 @@ export class AuthService {
           result.user.uid,
           result.user.email,
           fullName,
-          "reporter",
+          "admin",
           null,
           state,
           city
@@ -87,13 +87,19 @@ export class AuthService {
     state: string,
     city: string
   ) {
-    console.log(uid);
-    const user = new User(uid, email, displayName, role, imageUrl, state, city);
     this.fbStore
       .collection("users")
-      .add(JSON.parse(JSON.stringify(user)))
+      .add({
+        uid: uid,
+        email: email,
+        displayName: displayName,
+        role: "guest",
+        imageUrl: null,
+        state: state,
+        city: city
+      })
       .then(result => {
-        this.loginUser(user);
+        this.loginUser(new User(uid, email, displayName, "guest", null, state, city));
       })
       .catch(error => {
         this.store.dispatch(new UIActions.StopLoading());
@@ -129,7 +135,9 @@ export class AuthService {
   }
 
   logout() {
-    this.fbAuth.auth.signOut();
+    this.fbAuth.auth.signOut().then().catch(error => {
+      console.log(error);
+    });
     this.store.dispatch(new AuthActions.SetUnauthenticated());
     this.store.dispatch(new AuthActions.SetCurrentUser(null));
     this.router.navigateByUrl("/login");

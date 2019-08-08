@@ -17,10 +17,11 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { SharedModule } from './shared/shared.module';
 import { reducers } from './reducers';
+import { SettingsPopoverComponent } from './home/settings-popover/settings-popover.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, SettingsPopoverComponent],
+  entryComponents: [SettingsPopoverComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -37,6 +38,7 @@ import { reducers } from './reducers';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -7,7 +7,10 @@
       <ion-title>
         Mera Shehar Admin
       </ion-title>
-      <ion-buttons slot="secondary" *ngIf="isAuthenticated | async">
+      <!-- <ion-label slot="end" class="user-name-font-size">
+        Deepak Dhanwani
+      </ion-label> -->
+      <ion-buttons slot="end" *ngIf="isAuthenticated | async">
         <ion-button>
           <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
         </ion-button>
@@ -65,6 +68,12 @@
           <ion-item>
             <ion-icon name="paper-plane" slot="start"></ion-icon>
             <ion-label>Classified</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="search" slot="start"></ion-icon>
+            <ion-label>Jobs</ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
