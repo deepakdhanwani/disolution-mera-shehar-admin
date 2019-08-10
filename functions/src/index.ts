@@ -5,7 +5,7 @@ admin.initializeApp();
 
 const database = admin.firestore();
 
-exports.addMessage = functions.https.onRequest(async (req, res) => {
+exports.countDocumentsOfObject = functions.https.onRequest(async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
