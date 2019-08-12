@@ -31,6 +31,7 @@ export class AuthService {
       if (user) {
         this.router.navigateByUrl("/home");
         this.store.dispatch(new AuthActions.SetAuthenticaated());
+        this.loadUser(user.email, false);
       } else {
         this.router.navigateByUrl("/login");
         this.store.dispatch(new AuthActions.SetUnauthenticated());
@@ -72,7 +73,7 @@ export class AuthService {
     this.fbAuth.auth
       .signInWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
-        this.loadUser(result.user.email);
+        this.loadUser(result.user.email, true);
       })
       .catch(error => {
         this.store.dispatch(new UIActions.StopLoading());
@@ -101,7 +102,7 @@ export class AuthService {
         city: city
       })
       .then(result => {
-        this.loginUser(new User(uid, email, displayName, "guest", null, state, city));
+        this.loginUser(new User(uid, email, displayName, "guest", null, state, city), true);
       })
       .catch(error => {
         this.store.dispatch(new UIActions.StopLoading());
@@ -109,7 +110,7 @@ export class AuthService {
       });
   }
 
-  private loadUser(email: string) {
+  private loadUser(email: string, redirect: boolean) {
     this.fbStore
       .collection<User>("users", ref => {
         return ref.where("email", "==", email);
@@ -119,7 +120,7 @@ export class AuthService {
         take(1),
         tap(users => {
           if (users && users.length > 0) {
-            this.loginUser(users[0]);
+            this.loginUser(users[0], redirect);
           } else {
             this.store.dispatch(new UIActions.StopLoading());
             this.logout();
@@ -129,11 +130,13 @@ export class AuthService {
       .subscribe();
   }
 
-  private loginUser(user: User) {
+  private loginUser(user: User, redirect: boolean) {
     this.store.dispatch(new UIActions.StopLoading());
     this.store.dispatch(new AuthActions.SetAuthenticaated());
     this.store.dispatch(new AuthActions.SetCurrentUser(user));
-    this.router.navigateByUrl("/home");
+    if (redirect) {
+      this.router.navigateByUrl("/home");
+    }
   }
 
   logout() {

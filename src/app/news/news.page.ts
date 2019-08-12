@@ -1,5 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Observable } from 'rxjs';
+
+import * as fromRoot from '../reducers';
+import * as AuthActions from '../auth/reducers/auth.actions';
+import { Store } from '@ngrx/store';
+import { User } from '../auth/model/user.model';
 
 @Component({
   selector: "app-news",
@@ -7,10 +13,15 @@ import { Router } from "@angular/router";
   styleUrls: ["./news.page.scss"]
 })
 export class NewsPage implements OnInit {
-  constructor(private router: Router) {}
+
+  loggedInUser: Observable<User>;
+  selectedDate: Date;
+
+  constructor(private router: Router, private store: Store<fromRoot.State>) {}
 
   ngOnInit() {
-    console.log("new page entered");
+    this.loggedInUser = this.store.select(fromRoot.getCurrentUser);
+    this.selectedDate = new Date();
   }
 
   onPostNews() {

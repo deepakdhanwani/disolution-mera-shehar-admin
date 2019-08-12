@@ -39,3 +39,8 @@ export const getCurrentUserStatus = createSelector(
   getAuthState,
   fromAuth.getCurrentUser
 );
+
+export const getCurrentUser = createSelector(
+  getAuthState,
+  fromAuth.getCurrentUser
+);

@@ -16,6 +16,8 @@ import { StoreModule } from "@ngrx/store";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material';
 
 import { environment } from "../environments/environment";
 import { AppComponent } from "./app.component";
@@ -42,7 +44,9 @@ import { ImagePickerComponent } from './shared/image-picker/image-picker.compone
     BrowserAnimationsModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     StatusBar,
