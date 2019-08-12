@@ -29,6 +29,7 @@ export class NewNewsComponent implements OnInit {
   newNewsFormGroup: FormGroup;
   newsCategories: NewsCategoryInterface[] = [];
   newsRegions: NewsRegionInterface[] = [];
+  selectedImageCount = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -93,8 +94,10 @@ export class NewNewsComponent implements OnInit {
       })
       .then(modalElement => {
         modalElement.present();
-        modalElement.onDidDismiss().then(data => {
-          console.log(data);
+        modalElement.onDidDismiss().then((data: any) => {
+          if (data) {
+            this.selectedImageCount = data.data.selectedImages.length;
+          }
         });
       });
   }

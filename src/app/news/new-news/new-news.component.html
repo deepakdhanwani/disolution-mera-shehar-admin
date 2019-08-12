@@ -1,5 +1,17 @@
 <ion-content>
   <form [formGroup]="newNewsFormGroup" (ngSubmit)="onSubmit()">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/places/tabs/offers"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Post News</ion-title>
+      <ion-buttons slot="primary">
+        <ion-button (click)="onSubmit()" [disabled]="!newNewsFormGroup.valid" color="primary" fill="solid" shape="round" size="large">
+          <ion-icon name="checkmark" slot="start"></ion-icon>
+          <ion-label>Save</ion-label>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -51,9 +63,10 @@
             <ion-select formControlName="newsCategory">
               <ion-select-option
                 *ngFor="let category of newsCategories"
-                [value]="category.value">
-                  {{ category.name }}
-                </ion-select-option>
+                [value]="category.value"
+              >
+                {{ category.name }}
+              </ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -77,9 +90,10 @@
             <ion-select formControlName="newsRegion">
               <ion-select-option
                 *ngFor="let region of newsRegions"
-                [value]="region.value">
-                  {{ region.name }}
-                </ion-select-option>
+                [value]="region.value"
+              >
+                {{ region.name }}
+              </ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -91,9 +105,7 @@
         "
       >
         <ion-col>
-          <ion-label color="danger"
-            >Please select valid news region.</ion-label
-          >
+          <ion-label color="danger">Please select valid news region.</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -116,9 +128,7 @@
         "
       >
         <ion-col>
-          <ion-label color="danger"
-            >Please enter valid news source.</ion-label
-          >
+          <ion-label color="danger">Please enter valid news source.</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -141,14 +151,19 @@
         "
       >
         <ion-col>
-          <ion-label color="danger"
-            >Please enter valid youtube url.</ion-label
-          >
+          <ion-label color="danger">Please enter valid youtube url.</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button color="secondary" fill="clear" (click)="onSelectImage()">Select Images</ion-button>
+          <ion-button color="secondary" fill="clear" (click)="onSelectImage()"
+            >Select Images
+            <span
+              *ngIf="selectedImageCount > 0"
+              style="font-size: 10px;color:red"
+              >({{ selectedImageCount }} image(s) selected.)</span
+            >
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
