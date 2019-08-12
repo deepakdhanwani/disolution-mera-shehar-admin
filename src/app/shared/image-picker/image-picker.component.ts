@@ -5,7 +5,8 @@ import {
   CameraSource,
   CameraResultType
 } from "@capacitor/core";
-import { Platform } from "@ionic/angular";
+import { Platform, ModalController } from "@ionic/angular";
+import { UIService } from "../ui.service";
 
 @Component({
   selector: "app-image-picker",
@@ -18,16 +19,14 @@ export class ImagePickerComponent implements OnInit {
   >;
   selectedImages: string[];
   usePicker = false;
-  constructor(private platform: Platform) {}
+  constructor(
+    private platform: Platform,
+    private uiService: UIService,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
-    if (
-      (this.platform.is("mobile") && !this.platform.is("hybrid")) ||
-      this.platform.is("desktop")
-    ) {
-      this.usePicker = true;
-    }
-    console.log(this.usePicker);
+    this.usePicker = this.uiService.isDesktopOrWeb;
   }
 
   onFileChosen(event: Event) {
@@ -36,7 +35,14 @@ export class ImagePickerComponent implements OnInit {
       return;
     }
 
-    console.log(pickedFile.length);
+    if (pickedFile.length > 6) {
+      this.uiService.showToastNotication(
+        "You can select maximum 6 files",
+        2000
+      );
+      return;
+    }
+
     for (let i = 0; i < pickedFile.length; i++) {
       if (!this.selectedImages) {
         this.selectedImages = [];
@@ -48,7 +54,6 @@ export class ImagePickerComponent implements OnInit {
       };
       fr.readAsDataURL(pickedFile[i]);
     }
-    console.log(this.selectedImages);
   }
 
   onPickImage() {
@@ -78,5 +83,15 @@ export class ImagePickerComponent implements OnInit {
           return;
         });
     }
+  }
+
+  onCancel() {
+    this.modalController.dismiss();
+  }
+
+  onSave() {
+    this.modalController.dismiss({
+      selectedImages: this.selectedImages
+    });
   }
 }

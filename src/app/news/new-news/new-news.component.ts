@@ -88,10 +88,14 @@ export class NewNewsComponent implements OnInit {
   onSelectImage() {
     this.modalController
       .create({
-        component: ImagePickerComponent
+        component: ImagePickerComponent,
+        backdropDismiss: false
       })
       .then(modalElement => {
         modalElement.present();
+        modalElement.onDidDismiss().then(data => {
+          console.log(data);
+        });
       });
   }
 

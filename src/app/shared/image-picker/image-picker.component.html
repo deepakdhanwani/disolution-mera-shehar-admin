@@ -5,25 +5,46 @@
   padding
 >
   <ion-icon name="camera" slot="start"></ion-icon>
-  <ion-label>Select Image</ion-label>
+  <ion-label>Select Images</ion-label>
 </ion-button>
-
-<div *ngIf="selectedImages && selectedImages.length > 0" padding scrollY="true">
-  <ion-infinite-scroll>
-    <ion-infinite-scroll-content>
-      <div class="picker" *ngFor="let selectedImage of selectedImages" padding>
+<ion-grid *ngIf="selectedImages && selectedImages.length > 0" padding>
+  <ion-row>
+    <ion-col
+      size-md="6"
+      size-sm="6"
+      size-lg="4"
+      size-xl="4"
+      size-xs="6"
+      *ngFor="let selectedImage of selectedImages"
+    >
+      <div class="picker" padding>
         <ion-img
           role="button"
           class="location-image"
           [src]="selectedImage"
         ></ion-img>
       </div>
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-footer padding>
+  <ion-buttons float-end>
+    <ion-button color="danger" fill="solid" expand="block" (click)="onCancel()"
+      >Cancel</ion-button
+    >
+    <ion-button
+      color="primary"
+      fill="solid"
+      expand="block"
+      (click)="onSave()"
+      [disabled]="!(selectedImages && selectedImages.length > 0)"
+      >Save</ion-button
+    >
+  </ion-buttons>
+</ion-footer>
 <input
   type="file"
-  accept="image/jpeg"
+  accept="image/*"
   *ngIf="usePicker"
   multiple
   #filePicker

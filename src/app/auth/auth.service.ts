@@ -21,10 +21,12 @@ export class AuthService {
     private fbStore: AngularFirestore,
     private uiService: UIService,
     private store: Store<fromRoot.State>,
-    private router: Router
+    private router: Router,
+
   ) {}
 
   initAuthListener() {
+    
     this.fbAuth.authState.subscribe(user => {
       if (user) {
         this.router.navigateByUrl("/home");
