@@ -8,7 +8,6 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatPaginatorModule } from "@angular/material/paginator";
 
 import { HomePage } from "./home.page";
-import { SettingsPopoverComponent } from "./settings-popover/settings-popover.component";
 import { UsersPage } from './users/users.page';
 import { StoreModule } from "@ngrx/store";
 import { usersReducer } from './users/reducer/users.reducer';

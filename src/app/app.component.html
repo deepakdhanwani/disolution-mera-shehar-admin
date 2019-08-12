@@ -35,7 +35,7 @@
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item>
+          <ion-item [routerLink]="['/news']">
             <ion-icon name="paper" slot="start"></ion-icon>
             <ion-label>News</ion-label>
           </ion-item>
@@ -103,7 +103,7 @@
       </ion-list>
     </ion-content>
   </ion-menu>
-  <ion-content>
+  <ion-content overflow-scroll="true">
     <ion-router-outlet main></ion-router-outlet>
   </ion-content>
 </ion-app>

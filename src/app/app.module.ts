@@ -23,10 +23,11 @@ import { AppRoutingModule } from "./app-routing.module";
 import { SharedModule } from "./shared/shared.module";
 import { reducers } from "./reducers";
 import { SettingsPopoverComponent } from "./home/settings-popover/settings-popover.component";
+import { ImagePickerComponent } from './shared/image-picker/image-picker.component';
 
 @NgModule({
-  declarations: [AppComponent, SettingsPopoverComponent],
-  entryComponents: [SettingsPopoverComponent],
+  declarations: [AppComponent, SettingsPopoverComponent, ImagePickerComponent],
+  entryComponents: [SettingsPopoverComponent, ImagePickerComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

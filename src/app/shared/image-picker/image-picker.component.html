@@ -1,0 +1,31 @@
+<ion-button
+  color="primary"
+  (click)="onPickImage()"
+  *ngIf="!selectedImage"
+  padding
+>
+  <ion-icon name="camera" slot="start"></ion-icon>
+  <ion-label>Select Image</ion-label>
+</ion-button>
+
+<div *ngIf="selectedImages && selectedImages.length > 0" padding scrollY="true">
+  <ion-infinite-scroll>
+    <ion-infinite-scroll-content>
+      <div class="picker" *ngFor="let selectedImage of selectedImages" padding>
+        <ion-img
+          role="button"
+          class="location-image"
+          [src]="selectedImage"
+        ></ion-img>
+      </div>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</div>
+<input
+  type="file"
+  accept="image/jpeg"
+  *ngIf="usePicker"
+  multiple
+  #filePicker
+  (change)="onFileChosen($event)"
+/>

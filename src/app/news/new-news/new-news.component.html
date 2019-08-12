@@ -1,0 +1,156 @@
+<ion-content>
+  <form [formGroup]="newNewsFormGroup" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Headline</ion-label>
+            <ion-input
+              type="text"
+              autocomplete
+              autocorrect
+              formControlName="headline"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row
+        *ngIf="
+          newNewsFormGroup.get('headline').invalid &&
+          newNewsFormGroup.get('headline').touched
+        "
+      >
+        <ion-col>
+          <ion-label color="danger"
+            >Please enter valid news headline.</ion-label
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">News Content</ion-label>
+            <ion-textarea rows="5" formControlName="content"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row
+        *ngIf="
+          newNewsFormGroup.get('content').invalid &&
+          newNewsFormGroup.get('content').touched
+        "
+      >
+        <ion-col>
+          <ion-label color="danger">Please enter valid new content.</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Category</ion-label>
+            <ion-select formControlName="newsCategory">
+              <ion-select-option
+                *ngFor="let category of newsCategories"
+                [value]="category.value">
+                  {{ category.name }}
+                </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row
+        *ngIf="
+          newNewsFormGroup.get('newsCategory').invalid &&
+          newNewsFormGroup.get('newsCategory').touched
+        "
+      >
+        <ion-col>
+          <ion-label color="danger"
+            >Please select valid news category.</ion-label
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Region</ion-label>
+            <ion-select formControlName="newsRegion">
+              <ion-select-option
+                *ngFor="let region of newsRegions"
+                [value]="region.value">
+                  {{ region.name }}
+                </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row
+        *ngIf="
+          newNewsFormGroup.get('newsRegion').invalid &&
+          newNewsFormGroup.get('newsRegion').touched
+        "
+      >
+        <ion-col>
+          <ion-label color="danger"
+            >Please select valid news region.</ion-label
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Source</ion-label>
+            <ion-input
+              type="text"
+              autocomplete
+              autocorrect
+              formControlName="newsSource"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row
+        *ngIf="
+          newNewsFormGroup.get('newsSource').invalid &&
+          newNewsFormGroup.get('newsSource').touched
+        "
+      >
+        <ion-col>
+          <ion-label color="danger"
+            >Please enter valid news source.</ion-label
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Youtube URL</ion-label>
+            <ion-input
+              type="text"
+              autocomplete
+              autocorrect
+              formControlName="videoUrl"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row
+        *ngIf="
+          newNewsFormGroup.get('videoUrl').invalid &&
+          newNewsFormGroup.get('videoUrl').touched
+        "
+      >
+        <ion-col>
+          <ion-label color="danger"
+            >Please enter valid youtube url.</ion-label
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button color="secondary" fill="clear" (click)="onSelectImage()">Select Images</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
