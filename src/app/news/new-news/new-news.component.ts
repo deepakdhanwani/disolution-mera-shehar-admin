@@ -6,9 +6,10 @@ import {
   FormBuilder
 } from "@angular/forms";
 import { noWhitespaceValidator } from "../../shared/nowhitespace.validator";
-import { NewsCategory, NewsRegion } from "../model/news.model";
+import { NewsCategory, NewsRegion, NewsStatus } from "../model/news.model";
 import { ModalController } from "@ionic/angular";
 import { ImagePickerComponent } from "src/app/shared/image-picker/image-picker.component";
+import { NewsService } from "../news.service";
 
 interface NewsCategoryInterface {
   name: string;
@@ -30,10 +31,12 @@ export class NewNewsComponent implements OnInit {
   newsCategories: NewsCategoryInterface[] = [];
   newsRegions: NewsRegionInterface[] = [];
   selectedImageCount = 0;
+  selectedImages: FileList;
 
   constructor(
     private formBuilder: FormBuilder,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private newsService: NewsService
   ) {
     this.newsCategories.push({
       name: "Environmental",
@@ -97,14 +100,25 @@ export class NewNewsComponent implements OnInit {
         modalElement.onDidDismiss().then((data: any) => {
           if (data) {
             this.selectedImageCount = data.data.selectedImages.length;
+            this.selectedImages = data.data.selectedImages;
           }
         });
       });
   }
 
-  onSubmit() {
+  onSubmit(status: NewsStatus.Draft | NewsStatus.Published) {
     if (this.newNewsFormGroup.invalid) {
       return;
     }
+    this.newsService.saveNews(
+      this.newNewsFormGroup.value.headline,
+      this.newNewsFormGroup.value.content,
+      this.newNewsFormGroup.value.newsCategory,
+      this.newNewsFormGroup.value.newsRegion,
+      this.newNewsFormGroup.value.newsSource,
+      this.newNewsFormGroup.value.videoUrl,
+      status,
+      this.selectedImages
+    );
   }
 }

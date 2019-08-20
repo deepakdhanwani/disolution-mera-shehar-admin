@@ -1,15 +1,19 @@
 <ion-content>
-  <form [formGroup]="newNewsFormGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="newNewsFormGroup">
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/places/tabs/offers"></ion-back-button>
       </ion-buttons>
       <ion-title>Post News</ion-title>
       <ion-buttons slot="primary">
-        <ion-button (click)="onSubmit()" [disabled]="!newNewsFormGroup.valid" color="primary" fill="solid" shape="round" size="large">
+        <ion-button (click)="onSubmit('draft')" [disabled]="!newNewsFormGroup.valid" color="primary" fill="solid" shape="round" size="large">
           <ion-icon name="checkmark" slot="start"></ion-icon>
-          <ion-label>Save</ion-label>
+          <ion-label>Draft</ion-label>
         </ion-button>
+        <ion-button (click)="onSubmit('published')" [disabled]="!newNewsFormGroup.valid" color="primary" fill="solid" shape="round" size="large">
+            <ion-icon name="checkmark" slot="start"></ion-icon>
+            <ion-label>Post</ion-label>
+          </ion-button>
       </ion-buttons>
     </ion-toolbar>
     <ion-grid>

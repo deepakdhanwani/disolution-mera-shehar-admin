@@ -30,6 +30,7 @@ export interface News {
   newsPostedByEmail: string;
   newsPostedByName: string;
   newsPostedOn: Date;
+  newsCreatedOn: Date;
   newsStatus: NewsStatus.Draft | NewsStatus.Published;
   newsCategory:
     | NewsCategory.Environmental

@@ -18,6 +18,7 @@ export class ImagePickerComponent implements OnInit {
     HTMLInputElement
   >;
   selectedImages: string[];
+  fileList: FileList;
   usePicker = false;
   constructor(
     private platform: Platform,
@@ -42,6 +43,8 @@ export class ImagePickerComponent implements OnInit {
       );
       return;
     }
+
+    this.fileList = pickedFile;
 
     for (let i = 0; i < pickedFile.length; i++) {
       if (!this.selectedImages) {
@@ -91,7 +94,7 @@ export class ImagePickerComponent implements OnInit {
 
   onSave() {
     this.modalController.dismiss({
-      selectedImages: this.selectedImages
+      selectedImages: this.fileList
     });
   }
 }
