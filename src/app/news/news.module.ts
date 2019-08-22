@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { NewsPage } from './news.page';
 import { NewNewsComponent } from './new-news/new-news.component';
+import { TruncatePipe } from '../shared/truncate-pipe.pipe';
 
 const routes: Routes = [
   {
@@ -31,6 +32,6 @@ const routes: Routes = [
     MatNativeDateModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [NewsPage, NewNewsComponent]
+  declarations: [NewsPage, NewNewsComponent, TruncatePipe]
 })
 export class NewsPageModule {}
